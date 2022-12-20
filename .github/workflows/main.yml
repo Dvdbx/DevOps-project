@@ -59,11 +59,10 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - uses: actions/checkout@v2
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: node-app
+          name: userapi
 
       - name: "Deploy to Azure Web App"
         id: deploy-to-webapp
