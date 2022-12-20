@@ -52,7 +52,7 @@ jobs:
           path: .
   # CD part
   deploy:
-    needs: build # Requires CI part to be succesfully completed
+    needs: test # Requires CI part to be succesfully completed
     runs-on: ubuntu-latest
     environment:
       name: "production"
