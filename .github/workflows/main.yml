@@ -48,11 +48,11 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: node-app
+          name: userapi
           path: .
   # CD part
   deploy:
-    needs: test # Requires CI part to be succesfully completed
+    needs: build # Requires CI part to be succesfully completed
     runs-on: ubuntu-latest
     environment:
       name: "production"
