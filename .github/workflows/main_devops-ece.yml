@@ -5,7 +5,7 @@ on: [push]
 
 env:
   AZURE_WEBAPP_NAME: "devops-ece" # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: # set this to the path to your web app project, defaults to the repository root
+  AZURE_WEBAPP_PACKAGE_PATH: userapi # set this to the path to your web app project, defaults to the repository root
   NODE_VERSION: "16.x" # set this to the node version to use
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: [16.x]
       - name: npm install, build, and test
         run: |
           # Build and test the project, then
@@ -25,7 +25,7 @@ jobs:
           npm install
           npm run build --if-present
           npm run test --if-present
-        working-directory: my-app-path
+        working-directory: userapi
       - name: "Deploy to Azure WebApp"
         uses: azure/webapps-deploy@v2
         with:
