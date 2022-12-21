@@ -1,75 +1,34 @@
-# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+# File: .github/workflows/workflow.yml
+name: JavaScript CI
 
-name: Main CI/CD
+on: [push]
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+env:
+  AZURE_WEBAPP_NAME: "devops-ece" # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: userapi # set this to the path to your web app project, defaults to the repository root
+  NODE_VERSION: "16.x" # set this to the node version to use
 
 jobs:
-  # CI part
-  test:
+  build-and-deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
-    # Define `working-directory` if you application is in a subfolder
-    defaults:
-      run:
-        working-directory: userapi
-      # Service containers to run with `runner-job`
-    services:
-      # Label used to access the service container
-      redis:
-        # Docker Hub image
-        image: redis
-        ports:
-          # Opens tcp port 6379 on the host and service container
-          - 6379:6379
-    strategy:
-      matrix:
-        node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@main
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-          cache-dependency-path: "**/package-lock.json"
-      - run: npm ci
+          node-version: ${{ env.NODE_VERSION }}
       - name: npm install, build, and test
         run: |
+          # Build and test the project, then
+          # deploy to Azure Web App.
           npm install
           npm run build --if-present
           npm run test --if-present
-
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: userapi
-          path: .
-  # CD part
-  deploy:
-    needs: test # Requires CI part to be succesfully completed
-    runs-on: ubuntu-latest
-    environment:
-      name: "production"
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: userapi
-
-      - name: "Deploy to Azure Web App"
-        id: deploy-to-webapp
+        working-directory: my-app-path
+      - name: "Deploy to Azure WebApp"
         uses: azure/webapps-deploy@v2
         with:
-          app-name: "devops-ece"
-          slot-name: "production"
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_42cb3171052a4e3d883a8f5bbf7e4502 }}
-          package: .
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
