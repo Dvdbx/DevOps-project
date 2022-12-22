@@ -1,0 +1,14 @@
+
+---
+- name: Check GitLab health
+  uri:
+    url: http://127.0.0.1/-/health
+    return_content: yes
+  # Register the output of the module in a variable
+  register: gitlab_health
+
+- name: Print GitLab health
+  debug:
+    msg: "{{ gitlab_health.content }}"
+
+# Run the 2 other kind of health checks below
