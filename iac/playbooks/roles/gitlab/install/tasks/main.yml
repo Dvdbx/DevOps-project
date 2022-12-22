@@ -1,0 +1,17 @@
+ - name: Install required packages
+    apt: name={{ item }} state=present
+    with_items:
+      - git
+      - curl
+      - wget
+      - nginx
+      - nodejs
+- name: Install packages based on package.json using the npm
+    npm:
+      path: "{{/.vagrant/package.json}}"
+      state: present
+
+ - name: Run app
+    command: npm run build
+    args:
+      chdir: "{{/vagrant}}"
