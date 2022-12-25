@@ -97,7 +97,7 @@ docker push dvdsu/devopsece
 ```
 docker-compose up
 ```
-//screen ?
+<img src = "images/docker-compose-up.JPG" width = 600 alt ="run docker">
 
 And like before, we can acces our application on `127.0.0.1:3000` :
 
@@ -131,6 +131,7 @@ minikube ip
 
 <img src = "images/k8s-service.jpg" width = 600 alt ="k8s service">
 
+<img src = "images/k8s-service2.jpg" width = 600 alt ="k8s service">
 
 
 
