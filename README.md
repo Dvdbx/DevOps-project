@@ -142,6 +142,13 @@ We also setup persistent volumes using :
 
 - Istio is an open source service mesh that layers transparently onto existing distributed applications.
 
+- We first install Kiali for visualization using :
+
+```
+kubectl apply -f samples/addons
+```
+- It will also install others services such as Grafana and Prometheus that we will use in the next steps.
+
 - Here is our deployment using Istio :
 
 <img src = "images/istio.png" width = 600 alt ="istio1">
