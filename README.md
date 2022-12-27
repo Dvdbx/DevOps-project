@@ -148,5 +148,5 @@ We also setup persistent volumes using :
 
 <img src = "images/userapi_service_istio.png" width = 600 alt ="istio2">
 
-
+- We used the lab 9 to configure our files for request routing and traffic shifting.
 
