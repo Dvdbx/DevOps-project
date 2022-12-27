@@ -22,9 +22,15 @@ We want to implement Continuous Integration and Continuous Delivery.
 
 - For the Continuous Integration We implemented a main.yaml file which allows us to configure github actions. Github action will perform tests at each push or pull request on the main branch <br>
 
+<img src = "images/CI-CD2.JPG" width = 500 alt ="CI-CD2">
+
+- For the Continuous Delivery, We used microsoft  azure : https://portal.azure.com instead of Heroku which has become paid
+
+We configurated our workflows to deploy our application in azure after the Continuous Testing.<br>
+
 <img src = "images/CI-CD.JPG" width = 500 alt ="CI-CD">
 
-- For the Continuous Delivery... 
+<img src = "images/azure.JPG" width = 500 alt ="azure">
 
 ### 3. Configure and provision a virtual environment and run your application using the IaC approach
 
