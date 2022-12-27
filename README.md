@@ -122,17 +122,31 @@ kubectl get pods
 
 <img src = "images/k8s-get-pods.JPG" width = 600 alt ="k8s get pods">
 
-- With the following commands :
+- With the following commands, we expose our Kubernetes service to the outside : 
 ```
 minikube service userapi
 minikube ip
 ```
-- Then we expose our Kubernetes service to the outside :
 
 <img src = "images/k8s-service.jpg" width = 600 alt ="k8s service">
 
 <img src = "images/k8s-service2.jpg" width = 600 alt ="k8s service">
 
+We also setup persistent volumes using :
+
+- PersistentVolume (PV), a piece of storage in the cluster that has been provisioned by an administrator. It has a life cycle independent of any individual Pod that uses the PV.
+
+- PersistentVolumeClaim (PVC), a request for storage by a user.
+
+### 7. Make a service mesh using Istio
+
+- Istio is an open source service mesh that layers transparently onto existing distributed applications.
+
+- Here is our deployment using Istio :
+
+<img src = "images/istio.png" width = 600 alt ="istio1">
+
+<img src = "images/userapi_service_istio.png" width = 600 alt ="istio2">
 
 
 
