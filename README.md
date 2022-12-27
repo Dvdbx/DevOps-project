@@ -146,8 +146,9 @@ We also setup persistent volumes using :
 
 ```
 kubectl apply -f samples/addons
+kubectl rollout status deployment/kiali -n istio-system
 ```
-- It will also install others services such as Grafana and Prometheus that we will use in the next steps.
+- It will also load the manifest files of others services such as Grafana and Prometheus that we will use in the next steps.
 
 - Here is our deployment using Istio :
 
