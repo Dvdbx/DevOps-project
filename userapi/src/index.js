@@ -25,8 +25,8 @@ app.use('/user', userRouter)
 const requestCounter = new promClient.Counter({
   name: 'requests_total',
   help: 'Total number of requests',
+  labelNames: ['method', 'path']
 });
-//requestCounter.labels('GET', '/users', 'istio').inc();
 
 // Create a Gauge metric to track the current number of requests
 const requestGauge = new promClient.Gauge({
@@ -56,6 +56,19 @@ register.setDefaultLabels({
 });
 
 promClient.collectDefaultMetrics({register});
+
+app.use((req, res, next) => {
+  requestCounter.inc({ method: req.method, path: req.path });
+  requestGauge.inc();
+  next();
+});
+
+app.use((req, res, next) => {
+  res.on('finish', () => {
+    requestGauge.dec();
+  });
+  next();
+});
 
 
 // Expose the metrics endpoint
