@@ -164,3 +164,27 @@ kubectl rollout status deployment/kiali -n istio-system
 
 - We used the lab 9 to configure our files for request routing and traffic shifting.
 
+### 8. Implement Monitoring to your containerized application
+
+- Prometheus is an open-source systems monitoring and alerting toolkit. It is designed to collect metrics from various sources and store them in a time-series database.
+
+- Grafana is an open-source platform for creating and sharing dashboards and graphs. It can connect to various data sources, including Prometheus, and provide a user-friendly interface for creating and viewing graphs and charts. 
+
+Together, Prometheus and Grafana provide a powerful toolkit for monitoring and visualizing the performance of systems and applications. They are often deployed alongside containerized applications that are running on Kubernetes.
+
+- We implemented the `prom-client` library to expose some metric endpoints of our user API application.
+
+<img src = "images/prom-client.png" width = 600 alt ="prom-client">
+
+- Then can use both services Prometheus and Grafana in the localhost using these commands :
+
+```
+kubectl port-forward svc/prometheus -n istio-system 9090
+kubectl port-forward svc/grafana -n istio-system 3000
+
+```
+<img src = "images/prometheus.png" width = 600 alt ="prometheus">
+
+<img src = "images/grafana.png" width = 600 alt ="grafana">
+
+- We can see on the last screenshot some stats on the Grafana interface analyzing Istio behavior.

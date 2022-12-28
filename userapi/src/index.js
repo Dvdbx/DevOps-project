@@ -38,12 +38,14 @@ const requestGauge = new promClient.Gauge({
 const responseTime = new promClient.Summary({
   name: 'response_time',
   help: 'Response time of requests',
+  labelNames: ['code'],
 });
 
 // Create a Histogram metric to track the sizes of requests
 const requestSize = new promClient.Histogram({
   name: 'request_size',
   help: 'Size of requests',
+  labelNames: ['code'],
 });
 
 register.registerMetric(requestCounter);
@@ -60,6 +62,7 @@ promClient.collectDefaultMetrics({register});
 app.use((req, res, next) => {
   requestCounter.inc({ method: req.method, path: req.path });
   requestGauge.inc();
+  requestSize.labels('200').observe(0.1);
   next();
 });
 
