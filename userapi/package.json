@@ -12,6 +12,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "mixme": "^0.5.4",
+    "prom-client": "^14.1.0",
     "redis": "^3.1.2"
   },
   "devDependencies": {

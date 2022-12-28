@@ -20,13 +20,13 @@ This is the repository for our DevOps project.
 
 We want to implement Continuous Integration and Continuous Delivery.
 
-- For the Continuous Integration We implemented a main.yaml file which allows us to configure github actions. Github action will perform tests at each push or pull request on the main branch <br>
+- For the Continuous Integration, we implemented a main.yaml file which allows us to configure github actions. Github action will perform tests at each push or pull request on the main branch. 
 
 <img src = "images/CI-CD2.JPG" width = 500 alt ="CI-CD2">
 
-- For the Continuous Delivery, We used microsoft  azure : https://portal.azure.com instead of Heroku which has become paid
+- For the Continuous Delivery, we used [Microsoft Azure](https://portal.azure.com) instead of Heroku which isn't free anymore.
 
-We configurated our workflows to deploy our application in azure after the Continuous Testing.<br>
+We configurated our workflows to deploy our application in Azure after the Continuous Testing.
 
 <img src = "images/CI-CD.JPG" width = 500 alt ="CI-CD">
 
@@ -136,7 +136,7 @@ minikube ip
 
 <img src = "images/k8s-service.jpg" width = 600 alt ="k8s service">
 
-<img src = "images/k8s-service2.jpg" width = 600 alt ="k8s service">
+<img src = "images/k8s-service2.JPG" width = 600 alt ="k8s service">
 
 We also setup persistent volumes using :
 
